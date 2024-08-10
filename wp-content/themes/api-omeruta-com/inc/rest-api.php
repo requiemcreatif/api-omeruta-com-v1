@@ -9,11 +9,10 @@ function register_routes() {
     //print_r('Registering routes in apiomeruta API');
 
         // Route for fetching all posts
-    /*register_rest_route('apiomeruta/v1', '/posts', array(
-        'methods' => 'GET',
-        'callback' => 'get_all_posts',
-        'permission_callback' => '__return_true'
-    ));*/
+    register_rest_route('apiomeruta/v1', '/frontpage', array(
+        'methods' => WP_REST_Server::READABLE,
+        'callback' => 'get_frontpage_data',
+    ));
 
     register_rest_route('apiomeruta/v1', '/menu', array(
         'methods' => WP_REST_Server::READABLE,
@@ -37,6 +36,22 @@ function register_routes() {
 }
 add_action('rest_api_init', 'register_routes');
 
+
+// Function frontpage data
+function get_frontpage_data() {
+    $front_page_id = get_option('page_on_front');
+    if (!$front_page_id) {
+        return new WP_Error('no_front_page', 'No front page set', array('status' => 404));
+    }
+
+    $front_page = get_post($front_page_id);
+    if (!$front_page) {
+        return new WP_Error('front_page_not_found', 'Front page not found', array('status' => 404));
+    }
+
+    $data = HCMS_Contents::format_post_data($front_page);
+    return new WP_REST_Response($data, 200);
+}
 
 
 
