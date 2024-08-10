@@ -11,7 +11,6 @@ class HCMS_Contents
     // Function to format post data
     public static function format_post_data($post) {
         $featured_image = get_the_post_thumbnail_url($post->ID, 'full');
-
         return array(
             'id' => $post->ID,
             'title' => $post->post_title,
@@ -24,6 +23,7 @@ class HCMS_Contents
             'categories' => wp_get_post_categories($post->ID, array('fields' => 'names')),
             'tags' => wp_get_post_tags($post->ID, array('fields' => 'names')),
             'author' => get_the_author_meta('display_name', $post->post_author),
+            'type' => $post->post_type, //distinguish between posts and pages
         );
     }
 }
