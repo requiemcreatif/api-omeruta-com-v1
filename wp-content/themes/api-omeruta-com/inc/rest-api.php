@@ -9,16 +9,16 @@ function register_routes() {
     //print_r('Registering routes in apiomeruta API');
 
         // Route for fetching all posts
-    /*register_rest_route('apiomeruta/v1', '/posts', array(
+    register_rest_route('apiomeruta/v1', '/posts', array(
         'methods' => 'GET',
         'callback' => 'get_all_posts',
         'permission_callback' => '__return_true'
-    ));*/
-
-    register_rest_route('apiomeruta/v1', '/posts', array(
-        'methods' => WP_REST_Server::READABLE,
-        'callback' => 'get_all_posts',
     ));
+
+    // register_rest_route('apiomeruta/v1', '/posts', array(
+    //     'methods' => WP_REST_Server::READABLE,
+    //     'callback' => 'get_all_posts',
+    // ));
    
     // contact form route
     register_rest_route('apiomeruta/v1', '/contact', array(
@@ -45,6 +45,15 @@ function get_all_posts($request) {
         'order' => $request->get_param('order') ?: 'DESC',
     );
 
+    // Debug
+    error_log('Query args: ' . print_r($args, true));
+
+    $posts = get_posts($args);
+
+    // Debug
+    error_log('Number of posts found: ' . count($posts));
+
+
     if ($request->get_param('search')) {
         $args['s'] = sanitize_text_field($request->get_param('search'));
     }
@@ -55,5 +64,7 @@ function get_all_posts($request) {
 
     $posts = get_posts($args);
     $data = array_map([HCMS_Contents::class, 'format_post_data'], $posts);
+    // Debug
+    error_log('Formatted data: ' . print_r($data, true));
     return new WP_REST_Response($data, 200);
 }
