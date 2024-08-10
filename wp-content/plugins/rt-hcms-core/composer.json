@@ -1,0 +1,9 @@
+{
+	"name": "raketech/rt-hcms-core",
+	"type": "wordpress-plugin",
+	"description": "HCMS Core Base Functionality",
+	"version": "1.0.15",
+	"require": {
+		"composer/installers": "~1.0"
+	}
+}

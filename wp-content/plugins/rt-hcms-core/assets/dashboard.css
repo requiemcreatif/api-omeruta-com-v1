@@ -1,0 +1,94 @@
+.rt_hcms_text_row_full {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+	margin-bottom: 1rem;
+}
+
+.rt_hcms_text_row_full > label {
+	flex: 1 1 20%;
+	max-width: 20%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.rt_hcms_text_row_full > input[type='text'] {
+	flex: 1 1 80%;
+}
+
+.rt_hcms_text_row_full > input[type='text']::placeholder {
+	opacity: 0.4;
+}
+
+.rt_hcms_how_to_wrapper {
+	position: relative;
+}
+
+.rt_hcms_how_to_wrapper.inline {
+	display: inline-block;
+	margin-left: 0.5rem;
+}
+
+.rt_hcms_how_to_wrapper .dashicons {
+	cursor: pointer;
+}
+
+.rt_hcms_how_to_wrapper .dashicons::before {
+	color: #00ca72;
+}
+
+.rt_hcms_how_to_wrapper .rt_hcms_how_to_text {
+	display: none;
+	position: absolute;
+	bottom: 24px;
+	left: 24px;
+	width: 300px;
+	border: 1px solid #00ca72;
+	padding: 0.5rem;
+	background-color: #fff;
+}
+
+.rt_hcms_arr_wrapper {
+	margin-bottom: 1rem;
+	display: grid;
+	gap: 1rem;
+}
+
+@media screen and (min-width: 992px) {
+	.rt_hcms_arr_wrapper {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+.rt_hcms_arr_wrapper > .row {
+	display: flex;
+	align-items: center;
+	gap: 0.25rem;
+}
+
+.rt_hcms_outlinks_wrapper {
+	display: grid;
+	gap: 1rem;
+}
+
+@media screen and (min-width: 992px) {
+	.rt_hcms_outlinks_wrapper {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+.paragraph {
+	margin-block: 1em;
+}
+
+.rt_hcms_remove_item {
+	padding: 0;
+	border: none;
+	cursor: pointer;
+}
+
+.rt_hcms_remove_item > .dashicons-dismiss::before {
+	color: #eb373e;
+}
